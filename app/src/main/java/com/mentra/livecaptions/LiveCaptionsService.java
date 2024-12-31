@@ -55,6 +55,8 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
     private final TranscriptProcessor hanziTextTranscriptProcessor = new TranscriptProcessor(maxCharsPerHanziTranscript);
     private String currentLiveCaption = "";
     private String finalLiveCaption = "";
+    private final Handler callTimeoutHandler = new Handler(Looper.getMainLooper());
+    private Runnable timeoutRunnable;
 
     public LiveCaptionsService() {
         super();
@@ -96,11 +98,13 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
     }
 
     protected void setupEventBusSubscribers() {
-        try {
-            EventBus.getDefault().register(this);
-        }
-        catch(EventBusException e){
-            e.printStackTrace();
+        EventBus eventBus = EventBus.getDefault();
+        if (!eventBus.isRegistered(this)) {
+            try {
+                eventBus.register(this);
+            } catch (EventBusException e) {
+                Log.w("EventBus", "Subscriber already registered: " + e.getMessage());
+            }
         }
     }
 
@@ -243,6 +247,14 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
     }
 
     public void sendTextWallLiveCaptionLL(final String newLiveCaption, final boolean isFinal) {
+        callTimeoutHandler.removeCallbacks(timeoutRunnable);
+
+        timeoutRunnable = () -> {
+            // Call your desired function here
+            augmentOSLib.sendHomeScreen();
+        };
+        callTimeoutHandler.postDelayed(timeoutRunnable, 16000);
+
         String textBubble = "\uD83D\uDDE8";
 
         if (!newLiveCaption.isEmpty()) {
@@ -363,7 +375,7 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
     public static class TranscriptProcessor {
 
         private final int maxCharsPerLine;
-        private final int maxLines = 4;
+        private final int maxLines = 3;
 
         private Deque<String> lines;
 
