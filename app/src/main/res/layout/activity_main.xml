@@ -6,43 +6,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Language Learning Title -->
+    <!--    &lt;!&ndash; Transcribe Language Title &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/transcribeLanguageTitle"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Transcribe Language:"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/languageLearningTitle"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginStart="16dp"/>-->
+
+<!--    &lt;!&ndash; Transcribe Language Spinner &ndash;&gt;-->
+<!--    <Spinner-->
+<!--        android:id="@+id/transcribeLanguageSpinner"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/transcribeLanguageTitle"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/transcribeLanguageTitle"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="16dp"/>-->
+
     <TextView
-        android:id="@+id/languageLearningTitle"
+        android:id="@+id/liveCaptionsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Live Captions"
-        android:textSize="30sp"
+        android:layout_marginTop="32dp"
+        android:text="Live Captions on Smart Glasses"
+        android:textSize="25sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/transcribeLanguageTitle"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Transcribe Language Title -->
-    <TextView
-        android:id="@+id/transcribeLanguageTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Transcribe Language:"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/languageLearningTitle"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
-
-    <!-- Transcribe Language Spinner -->
-    <Spinner
-        android:id="@+id/transcribeLanguageSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/transcribeLanguageTitle"
-        app:layout_constraintTop_toTopOf="@+id/transcribeLanguageTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/post_sign_in_message"
@@ -54,6 +52,6 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transcribeLanguageSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/liveCaptionsTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
