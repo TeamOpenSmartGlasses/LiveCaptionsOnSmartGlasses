@@ -26,18 +26,18 @@ public class LauncherActivity extends AppCompatActivity {
         Context mContext = this;
 
         // Spinners
-        Spinner transcribeLanguageSpinner = findViewById(R.id.transcribeLanguageSpinner);
+//        Spinner transcribeLanguageSpinner = findViewById(R.id.transcribeLanguageSpinner);
 
 
         // Populate Spinners with options
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                mContext, R.array.language_options, android.R.layout.simple_spinner_item
-        );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        transcribeLanguageSpinner.setAdapter(adapter);
+//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+//                mContext, R.array.language_options, android.R.layout.simple_spinner_item
+//        );
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        transcribeLanguageSpinner.setAdapter(adapter);
 
         // Set initial values and listeners for Spinners
-        setupSpinner(transcribeLanguageSpinner, mContext, "transcribeLanguage");
+//        setupSpinner(transcribeLanguageSpinner, mContext, "transcribeLanguage");
     }
 
     private void setupSpinner(Spinner spinner, Context context, String preferenceKey) {
