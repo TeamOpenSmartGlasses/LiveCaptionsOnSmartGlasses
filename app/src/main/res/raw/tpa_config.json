@@ -9,7 +9,7 @@
     {
       "key": "transcribe_language",
       "type": "select",
-      "label": "Translate from:",
+      "label": "Transcribe language",
       "defaultValue": "Chinese (Pinyin)",
       "options": [
         {
