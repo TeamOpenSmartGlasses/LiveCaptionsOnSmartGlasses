@@ -78,7 +78,7 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
         startTranscribeLanguageCheckTask();
 
         //setup event bus subscribers
-        setupEventBusSubscribers();
+//        setupEventBusSubscribers();
 
         displayQueue = new DisplayQueue();
 
@@ -92,22 +92,19 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
         Log.d(TAG, "Convoscope service started");
 
-
-
         completeInitialization();
-
     }
 
-    protected void setupEventBusSubscribers() {
-        EventBus eventBus = EventBus.getDefault();
-        if (!eventBus.isRegistered(this)) {
-            try {
-                eventBus.register(this);
-            } catch (EventBusException e) {
-                Log.w("EventBus", "Subscriber already registered: " + e.getMessage());
-            }
-        }
-    }
+//    protected void setupEventBusSubscribers() {
+//        EventBus eventBus = EventBus.getDefault();
+//        if (!eventBus.isRegistered(this)) {
+//            try {
+//                eventBus.register(this);
+//            } catch (EventBusException e) {
+//                Log.w("EventBus", "Subscriber already registered: " + e.getMessage());
+//            }
+//        }
+//    }
 
     public void processTranscriptionCallback(String transcript, String languageCode, long timestamp, boolean isFinal) {
         Log.d(TAG, "Got a transcript: " + transcript + ", which is FINAL? " + isFinal + " and has language code: " + languageCode);
