@@ -313,6 +313,9 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
                 // If the language has changed or this is the first call
                 if (lastTranscribeLanguage == null || !lastTranscribeLanguage.equals(currentTranscribeLanguage)) {
+                    if (lastTranscribeLanguage != null) {
+                        augmentOSLib.stopTranscription(lastTranscribeLanguage);
+                    }
                     augmentOSLib.requestTranscription(currentTranscribeLanguage);
                     finalLiveCaption = "";
                     lastTranscribeLanguage = currentTranscribeLanguage;
