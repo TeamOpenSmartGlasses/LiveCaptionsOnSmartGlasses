@@ -155,12 +155,6 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
         debounceAndShowTranscriptOnGlasses(text, isFinal);
     }
 
-    private void requestTranscription() {
-        String transcriptionLanguage = getChosenTranscribeLanguage(this);
-        Log.d(TAG, "Requesting transcription in " + transcriptionLanguage);
-        augmentOSLib.subscribe(new StartAsrStreamRequestEvent(transcriptionLanguage));
-    }
-
     private final Handler glassesTranscriptDebounceHandler = new Handler(Looper.getMainLooper());
     private Runnable glassesTranscriptDebounceRunnable;
     private long glassesTranscriptLastSentTime = 0;
@@ -319,9 +313,8 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
                 // If the language has changed or this is the first call
                 if (lastTranscribeLanguage == null || !lastTranscribeLanguage.equals(currentTranscribeLanguage)) {
-                    requestTranscription();
+                    augmentOSLib.requestTranscription(currentTranscribeLanguage);
                     finalLiveCaption = "";
-
                     lastTranscribeLanguage = currentTranscribeLanguage;
                 }
 
