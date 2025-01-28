@@ -13,6 +13,7 @@ import com.teamopensmartglasses.augmentoslib.AugmentOSLib;
 import com.teamopensmartglasses.augmentoslib.AugmentOSSettingsManager;
 import com.teamopensmartglasses.augmentoslib.DataStreamType;
 import com.teamopensmartglasses.augmentoslib.SmartGlassesAndroidService;
+import com.teamopensmartglasses.augmentoslib.SpeechRecUtils;
 import com.teamopensmartglasses.augmentoslib.events.SpeechRecOutputEvent;
 import com.teamopensmartglasses.augmentoslib.events.StartAsrStreamRequestEvent;
 
@@ -314,9 +315,9 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
                 // If the language has changed or this is the first call
                 if (lastTranscribeLanguage == null || !lastTranscribeLanguage.equals(currentTranscribeLanguage)) {
                     if (lastTranscribeLanguage != null) {
-                        augmentOSLib.stopTranscription(lastTranscribeLanguage);
+                        augmentOSLib.stopTranscription(SpeechRecUtils.languageToLocale(lastTranscribeLanguage));
                     }
-                    augmentOSLib.requestTranscription(currentTranscribeLanguage);
+                    augmentOSLib.requestTranscription(SpeechRecUtils.languageToLocale(currentTranscribeLanguage));
                     finalLiveCaption = "";
                     lastTranscribeLanguage = currentTranscribeLanguage;
                 }
