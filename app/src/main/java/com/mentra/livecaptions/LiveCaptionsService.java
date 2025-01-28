@@ -13,7 +13,9 @@ import com.teamopensmartglasses.augmentoslib.AugmentOSLib;
 import com.teamopensmartglasses.augmentoslib.AugmentOSSettingsManager;
 import com.teamopensmartglasses.augmentoslib.DataStreamType;
 import com.teamopensmartglasses.augmentoslib.SmartGlassesAndroidService;
+import com.teamopensmartglasses.augmentoslib.SpeechRecUtils;
 import com.teamopensmartglasses.augmentoslib.events.SpeechRecOutputEvent;
+import com.teamopensmartglasses.augmentoslib.events.StartAsrStreamRequestEvent;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -92,7 +94,10 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
         Log.d(TAG, "Convoscope service started");
 
+
+
         completeInitialization();
+
     }
 
 //    protected void setupEventBusSubscribers() {
@@ -151,7 +156,7 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
         debounceAndShowTranscriptOnGlasses(text, isFinal);
     }
 
-    private Handler glassesTranscriptDebounceHandler = new Handler(Looper.getMainLooper());
+    private final Handler glassesTranscriptDebounceHandler = new Handler(Looper.getMainLooper());
     private Runnable glassesTranscriptDebounceRunnable;
     private long glassesTranscriptLastSentTime = 0;
     private final long GLASSES_TRANSCRIPTS_DEBOUNCE_DELAY = 400; // in milliseconds
@@ -293,7 +298,7 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
     public static String getChosenTranscribeLanguage(Context context) {
         String transcribeLanguageString = AugmentOSSettingsManager.getStringSetting(context, "transcribe_language");
-        if (transcribeLanguageString.equals("")){
+        if (transcribeLanguageString.isEmpty()){
             saveChosenTranscribeLanguage(context, "Chinese");
             transcribeLanguageString = "Chinese";
         }
@@ -309,62 +314,18 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
                 // If the language has changed or this is the first call
                 if (lastTranscribeLanguage == null || !lastTranscribeLanguage.equals(currentTranscribeLanguage)) {
-                    lastTranscribeLanguage = currentTranscribeLanguage;
-
-                    switch (currentTranscribeLanguage) {
-                        case "Default":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_DEFAULT_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "English":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_ENGLISH_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Chinese":
-                        case "Chinese (Pinyin)":
-                        case "Chinese (Hanzi)":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_CHINESE_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Russian":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_RUSSIAN_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "French":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_FRENCH_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Spanish":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_SPANISH_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "German":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_GERMAN_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Arabic":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_ARABIC_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Korean":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_KOREAN_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Italian":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_ITALIAN_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Turkish":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_TURKISH_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Portuguese":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_PORTUGUESE_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        case "Dutch":
-                            augmentOSLib.subscribe(DataStreamType.TRANSCRIPTION_DUTCH_STREAM, LiveCaptionsService.this::processTranscriptionCallback);
-                            break;
-                        default:
-                            Log.d(TAG, "UNKNOWN TRANSCRIBE LANGUAGE: " + currentTranscribeLanguage);
-                            break;
+                    if (lastTranscribeLanguage != null) {
+                        augmentOSLib.stopTranscription(SpeechRecUtils.languageToLocale(lastTranscribeLanguage));
                     }
-
+                    augmentOSLib.requestTranscription(SpeechRecUtils.languageToLocale(currentTranscribeLanguage));
                     finalLiveCaption = "";
+                    lastTranscribeLanguage = currentTranscribeLanguage;
                 }
 
                 // Schedule the next check
                 transcribeLanguageCheckHandler.postDelayed(this, 333); // Approximately 3 times a second
             }
-        }, 0);
+        }, 200);
     }
 
     public static class TranscriptProcessor {
@@ -489,7 +450,6 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
             return finalString;
         }
-
 
         public void clear() {
             lines.clear();
