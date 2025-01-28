@@ -6,30 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    &lt;!&ndash; Transcribe Language Title &ndash;&gt;-->
-<!--    <TextView-->
-<!--        android:id="@+id/transcribeLanguageTitle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Transcribe Language:"-->
-<!--        android:textSize="20sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/languageLearningTitle"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_marginStart="16dp"/>-->
-
-<!--    &lt;!&ndash; Transcribe Language Spinner &ndash;&gt;-->
-<!--    <Spinner-->
-<!--        android:id="@+id/transcribeLanguageSpinner"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/transcribeLanguageTitle"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/transcribeLanguageTitle"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginEnd="16dp"/>-->
-
     <TextView
         android:id="@+id/liveCaptionsTitle"
         android:layout_width="wrap_content"
@@ -47,9 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Please open AugmentOS to use this app."
+        android:text="Please open AugmentOS Manager to use this app."
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/liveCaptionsTitle" />
