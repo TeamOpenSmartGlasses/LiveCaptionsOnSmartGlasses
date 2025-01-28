@@ -11,7 +11,7 @@
       "key": "transcribe_language",
       "type": "select",
       "label": "Transcribe language",
-      "defaultValue": "Chinese (Pinyin)",
+      "defaultValue": "English",
       "options": [
         {
           "label": "English",
