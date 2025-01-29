@@ -1,4 +1,4 @@
-package com.mentra.livecaptions;
+package com.augmentos.livecaptions;
 
 import android.util.Log;
 

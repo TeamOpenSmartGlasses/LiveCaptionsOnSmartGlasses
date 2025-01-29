@@ -17,7 +17,7 @@
         tools:targetApi="31">
 
         <!-- Declare the service that will interact with AugmentOS -->
-        <service android:name="com.mentra.livecaptions.LiveCaptionsService"
+        <service android:name="com.augmentos.livecaptions.LiveCaptionsService"
             android:exported="true">
 
             <!-- Required intent filter to communicate with AugmentOS -->

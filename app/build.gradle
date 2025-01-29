@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.mentra.livecaptions'
+    namespace 'com.augmentos.livecaptions'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.mentra.livecaptions"
+        applicationId "com.augmentos.livecaptions"
         minSdk 28
         targetSdk 33
         versionCode 1
