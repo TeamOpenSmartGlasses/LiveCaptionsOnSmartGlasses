@@ -106,8 +106,6 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
         Log.d(TAG, "Deinit augmentOSLib");
         augmentOSLib.deinit();
         Log.d(TAG, "csePoll handler remove");
-        Log.d(TAG, "displayPoll handler remove");
-        Log.d(TAG, "debugTranscriptsHnalderPoll handler remove");
         if (debugTranscriptsRunning) {
             debugTranscriptsHandler.removeCallbacksAndMessages(null);
         }
