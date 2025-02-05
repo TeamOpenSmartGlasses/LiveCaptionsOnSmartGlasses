@@ -103,15 +103,10 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
     @Override
     public void onDestroy(){
         Log.d(TAG, "onDestroy: Called");
-        Log.d(TAG, "Deinit augmentOSLib");
         augmentOSLib.deinit();
-        Log.d(TAG, "csePoll handler remove");
         if (debugTranscriptsRunning) {
             debugTranscriptsHandler.removeCallbacksAndMessages(null);
         }
-        Log.d(TAG, "locationSystem remove");
-        EventBus.getDefault().unregister(this);
-
         Log.d(TAG, "ran onDestroy");
         super.onDestroy();
     }
