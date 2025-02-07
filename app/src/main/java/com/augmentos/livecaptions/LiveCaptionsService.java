@@ -58,9 +58,7 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-
+    public void setup() {
         // Create AugmentOSLib instance with context: this
         augmentOSLib = new AugmentOSLib(this);
 
@@ -124,6 +122,10 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
         String languageCode = event.languageCode;
         long time = event.timestamp;
         boolean isFinal = event.isFinal;
+
+        if (isFinal){
+            Log.d(TAG, "Live Captions got final: " + text);
+        }
 
         debounceAndShowTranscriptOnGlasses(text, isFinal);
     }
