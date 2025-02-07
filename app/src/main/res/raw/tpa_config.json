@@ -34,8 +34,16 @@
           "value": "Spanish"
         },
         {
+          "label": "Japanese",
+          "value": "Japanese"
+        },
+        {
           "label": "Dutch",
           "value": "Dutch"
+        },
+        {
+          "label": "Finnish",
+          "value": "Finnish"
         },
         {
           "label": "French",

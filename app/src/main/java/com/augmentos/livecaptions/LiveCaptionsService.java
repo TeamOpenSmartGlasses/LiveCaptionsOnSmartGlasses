@@ -229,7 +229,9 @@ public class LiveCaptionsService extends SmartGlassesAndroidService {
 
         if (!newLiveCaption.isEmpty()) {
             int maxLen;
-            if (getChosenTranscribeLanguage(this).equals("Chinese (Hanzi)") ||
+            if (
+                    getChosenTranscribeLanguage(this).equals("Japanese") ||
+                    getChosenTranscribeLanguage(this).equals("Chinese (Hanzi)") ||
                     getChosenTranscribeLanguage(this).equals("Chinese (Hanzi)") && !segmenterLoaded) {
                 maxLen = 40;
                 currentLiveCaption = hanziTextTranscriptProcessor.processString(finalLiveCaption + " " + newLiveCaption, isFinal);
